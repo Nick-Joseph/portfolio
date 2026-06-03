@@ -1,147 +1,279 @@
-.hero {
-  position: relative;
+/* =====================================================
+   Layout baseline
+   The existing index.css sets #root to text-align: center.
+   We want left-aligned text inside content sections for
+   readability, but keep Hero centered. Section rules
+   override the root because they target the actual elements.
+   ===================================================== */
 
-  .dog {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .dog {
-
-    top: 100px;
-    height: 100px;
-    width: auto;
-
-  }
-}
-
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
-
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
+section {
   text-align: left;
+  padding: 64px 32px;
+  border-top: 1px solid var(--border);
+}
 
-  &>div {
-    flex: 1 1 0;
-    padding: 32px;
+section:first-of-type {
+  border-top: none;
+}
 
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
+#hero {
+  text-align: center;
+  padding-top: 64px;
+}
 
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
+/* =====================================================
+   Navbar — uses Flexbox for horizontal layout
+   `position: sticky` keeps it pinned to the top while
+   the page scrolls underneath it.
+   ===================================================== */
 
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-brand {
+  font-weight: 600;
+  color: var(--text-h);
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+
+.navbar-links a:hover {
+  color: var(--accent);
+}
+
+/* =====================================================
+   Hero
+   ===================================================== */
+
+#hero .dog {
+  width: 140px;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#hero h1 {
+  margin: 24px 0 8px;
+}
+
+#hero button {
+  margin: 8px 6px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  transition: background 0.2s, color 0.2s;
+}
+
+#hero button:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* =====================================================
+   About
+   ===================================================== */
+
+#about {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+#about p {
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+/* =====================================================
+   Projects — uses CSS Grid for the 2-column card layout
+   On narrow screens (mobile), the media query collapses
+   to a single column.
+   ===================================================== */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+@media (max-width: 720px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
   }
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+.project-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  background: var(--bg);
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
-#next-steps ul {
+.project-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.project-card h3 {
+  margin: 0 0 8px;
+  color: var(--text-h);
+}
+
+.project-card p {
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.tech-list {
   list-style: none;
   padding: 0;
+  margin: 0 0 16px;
   display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+.tech-list li {
+  background: var(--code-bg);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--text-h);
+  font-family: var(--mono);
 }
 
-.ticks {
-  position: relative;
-  width: 100%;
+.project-links {
+  display: flex;
+  gap: 16px;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+.project-links a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
+.project-links a:hover {
+  text-decoration: underline;
+}
 
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+/* =====================================================
+   Resume
+   ===================================================== */
+
+.resume-entry {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.resume-entry:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.resume-entry h3 {
+  margin: 0 0 4px;
+  color: var(--text-h);
+}
+
+.resume-period {
+  color: var(--text);
+  font-size: 14px;
+  margin: 0 0 8px;
+  font-style: italic;
+}
+
+.resume-entry p {
+  line-height: 1.6;
+}
+
+/* =====================================================
+   Contact form — Flexbox column layout for stacked fields
+   ===================================================== */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 480px;
+  margin: 24px auto 0;
+}
+
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: var(--text-h);
+  font-weight: 500;
+}
+
+.contact-form input,
+.contact-form textarea {
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-h);
+  font: inherit;
+  font-weight: normal;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  font-family: var(--sans);
+}
+
+.contact-form button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity 0.2s;
+}
+
+.contact-form button:hover {
+  opacity: 0.9;
 }
