@@ -1,11 +1,32 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
+import Skills from './components/Skills'
 import Projects from './components/Projects'
 import Resume from './components/Resume'
 import Contact from './components/Contact'
 import type { Project } from './types/Project'
+import type { SkillGroup } from './components/Skills'
+import type { ResumeEntry } from './components/Resume'
 import './App.css'
+
+/* =====================================================
+   SITE CONTENT
+   Everything you'd edit to update the site lives here.
+   Change the text below and the page updates.
+   ===================================================== */
+
+const aboutParagraphs = [
+  'Hey, I’m a software developer based in Orlando, Florida.',
+  'Anything you need to build I can do!',
+]
+
+const skillGroups: SkillGroup[] = [
+  { category: 'Languages', items: ['TypeScript', 'JavaScript', 'HTML', 'CSS', 'Dart', 'Flutter'] },
+  { category: 'Frontend', items: ['React', 'Vite'] },
+  { category: 'Backend', items: ['Node.js', 'Express'] },
+  { category: 'Tools', items: ['Git', 'GitHub', 'VS Code'] },
+]
 
 const myProjects: Project[] = [
   {
@@ -14,26 +35,35 @@ const myProjects: Project[] = [
     description:
       'This site — built from scratch with React 19, TypeScript, Vite, and an Express backend.',
     tech: ['React', 'TypeScript', 'Vite', 'Express', 'Node.js'],
-    repoUrl: 'https://github.com/yourname/portfolio-frontend',
+    repoUrl: 'https://github.com/Nick-Joseph',
   },
 ]
 
-const myEntries = [
+const myEntries: ResumeEntry[] = [
+  // One experience entry — repeat the object for each job:
   {
-    id: 'self-study',
-    role: 'Self-directed Software Development Study',
-    organization: 'Independent',
-    period: '2026 – present',
-    description:
-      'Building a full-stack portfolio with React, TypeScript, Vite, and Express. Learning by shipping.',
+    id: 'flutterdeveloper-role',        // any unique string, e.g. 'acme-2022'
+    role: 'Flutter Developer',
+    organization: 'Logride',
+    period: '2025 – 2026',
+    description: 'Flutter developer for the android application in logride',
+
   },
   {
-    id: 'finance-role',
-    role: 'Finance — past role',
-    organization: 'Replace with your real employer',
-    period: '2020 – 2025',
+    id: 'savana-role',
+    role: 'Flutter SDET',
+    organization: 'Savana',
+    period: '2024 – 2025',
     description:
-      'Replace with one or two sentences describing what you did. Quantify if you can.',
+      'Creating automated testing suites for inner banking systems and processes',
+  },
+  {
+    id: 'consulting-role',
+    role: ' Software Developer',
+    organization: 'LunaDev',
+    period: '2020 – 2024',
+    description:
+      'Full Stack mobile developer creating applications for Orlando based companies.',
   },
 ]
 
@@ -41,13 +71,15 @@ function App() {
   return (
     <>
       <Navbar />
-      <Hero name="Nicholas Joseph" tagline="FullStack Developer in training" />
-      <About
-        headline="About me"
-        paragraphs={['Hello, I’m a software developer from Orlando, Florida.']}
+      <Hero
+        name="Nicholas Joseph"
+        tagline="Full-Stack Developer"
+        available={true}
       />
+      <About headline="About me" paragraphs={aboutParagraphs} />
+      <Skills headline="Skills" groups={skillGroups} />
       <Projects headline="Projects" projects={myProjects} />
-      <Resume headline="Experience" entries={myEntries} />
+      <Resume headline="Experience" entries={myEntries} resumeUrl="/resume.pdf" />
       <Contact />
     </>
   )

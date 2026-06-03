@@ -77,24 +77,78 @@ section:first-of-type {
 }
 
 #hero h1 {
-  margin: 24px 0 8px;
+  margin: 16px 0 8px;
 }
 
-#hero button {
-  margin: 8px 6px;
+.hero-tagline {
+  font-size: 20px;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+
+/* "Available for work" status pill */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+}
+
+/* Hero call-to-action buttons */
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+/* Shared button styles (reused across the site) */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary {
   background: var(--accent-bg);
   color: var(--accent);
   border: 1px solid var(--accent-border);
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font: inherit;
-  transition: background 0.2s, color 0.2s;
 }
 
-#hero button:hover {
+.btn-secondary:hover {
   background: var(--accent);
-  color: white;
+  color: #fff;
 }
 
 /* =====================================================
@@ -187,8 +241,44 @@ section:first-of-type {
 }
 
 /* =====================================================
+   Skills — grid of categorized tag groups
+   ===================================================== */
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+@media (max-width: 720px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skill-group h3 {
+  margin: 0 0 12px;
+  color: var(--text-h);
+  font-size: 16px;
+}
+
+/* =====================================================
    Resume
    ===================================================== */
+
+.resume-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.resume-header h2 {
+  margin: 0;
+}
 
 .resume-entry {
   margin-bottom: 24px;
@@ -276,4 +366,21 @@ section:first-of-type {
 
 .contact-form button:hover {
   opacity: 0.9;
+}
+
+.contact-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-success {
+  color: #16a34a;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.form-error {
+  color: #dc2626;
+  font-weight: 500;
+  margin-top: 12px;
 }

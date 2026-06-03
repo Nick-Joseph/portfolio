@@ -1,25 +1,54 @@
 import { useState } from 'react'
 
+// A small "state machine" for the form's status. Using a single string
+// instead of several booleans keeps the UI states mutually exclusive.
+type Status = 'idle' | 'sending' | 'success' | 'error'
+
 function Contact() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
-    const [submitted, setSubmitted] = useState(false)
+    const [status, setStatus] = useState<Status>('idle')
+    const [error, setError] = useState('')
 
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        console.log('Form submitted:', { name, email, message })
-        setSubmitted(true)
-        setName('')
-        setEmail('')
-        setMessage('')
+        setStatus('sending')
+        setError('')
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, message }),
+            })
+
+            const data = await response.json()
+
+            if (!response.ok || !data.ok) {
+                throw new Error(data.error ?? 'Something went wrong.')
+            }
+
+            setStatus('success')
+            setName('')
+            setEmail('')
+            setMessage('')
+        } catch (err) {
+            setStatus('error')
+            setError(err instanceof Error ? err.message : 'Something went wrong.')
+        }
     }
+
+    const sending = status === 'sending'
 
     return (
         <section id="contact">
             <h2>Contact</h2>
 
-            {submitted && <p>Thanks — I'll be in touch.</p>}
+            {status === 'success' && (
+                <p className="form-success">Thanks — I’ll be in touch.</p>
+            )}
+            {status === 'error' && <p className="form-error">{error}</p>}
 
             <form onSubmit={handleSubmit} className="contact-form">
                 <label>
@@ -29,6 +58,7 @@ function Contact() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
+                        disabled={sending}
                     />
                 </label>
 
@@ -39,6 +69,7 @@ function Contact() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
+                        disabled={sending}
                     />
                 </label>
 
@@ -49,10 +80,13 @@ function Contact() {
                         onChange={(e) => setMessage(e.target.value)}
                         required
                         rows={5}
+                        disabled={sending}
                     />
                 </label>
 
-                <button type="submit">Send</button>
+                <button type="submit" disabled={sending}>
+                    {sending ? 'Sending…' : 'Send'}
+                </button>
             </form>
         </section>
     )

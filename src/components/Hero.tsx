@@ -1,29 +1,40 @@
 import dog from '../assets/nori.png'
-import { useState } from 'react'
 
 type HeroProps = {
-    name: string,
+    name: string
     tagline: string
+    available?: boolean
 }
 
-function Hero({ name, tagline }: HeroProps) {
-    const [showStatus, setShowStatus] = useState(false)
-    const [likes, setLikes] = useState(0)
+function Hero({ name, tagline, available = true }: HeroProps) {
+    return (
+        <section id="hero">
+            <div className="hero">
+                <img src={dog} className="dog" alt={`${name} avatar`} />
+            </div>
 
-    return (<section id="hero">
+            {available && (
+                <span className="status-badge">
+                    <span className="status-dot" />
+                    Available for work
+                </span>
+            )}
 
-        <div className="hero">
-            <img src={dog} className="dog" alt='dog logo' />
+            <div className="hero-text">
+                <h1>{name}</h1>
+                <p className="hero-tagline">{tagline}</p>
+            </div>
 
-        </div>
-        <div><h1>{name}</h1><p>{tagline}</p></div>
-        <button onClick={() => setShowStatus(!showStatus)}>{showStatus ? 'Hide status' : 'Show status'}</button>
-        {showStatus && <p>✅ Available for work</p>}
-        <button onClick={() => setLikes(likes + 1)}>Like : {likes}</button>
-
-    </section>)
-
-
+            <div className="hero-cta">
+                <a href="#projects" className="btn btn-primary">
+                    View my work
+                </a>
+                <a href="#contact" className="btn btn-secondary">
+                    Get in touch
+                </a>
+            </div>
+        </section>
+    )
 }
 
 export default Hero
