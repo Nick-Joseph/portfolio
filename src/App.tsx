@@ -17,14 +17,16 @@ import './App.css'
    ===================================================== */
 
 const aboutParagraphs = [
-  'Hey, I’m a software developer based in Orlando, Florida.',
-  'Anything you need to build I can do!',
+  'I’m a full-stack and mobile developer based in Orlando, Florida, with several years of experience shipping production applications.',
+  'My focus is building polished, reliable mobile apps with Flutter and Dart, backed by web technologies like React, TypeScript, and Node.js. I’ve also worked as an SDET writing automated test suites for banking systems, so I care as much about software that works correctly as software that ships.',
 ]
 
 const skillGroups: SkillGroup[] = [
-  { category: 'Languages', items: ['TypeScript', 'JavaScript', 'HTML', 'CSS', 'Dart', 'Flutter'] },
+  { category: 'Languages', items: ['TypeScript', 'JavaScript', 'Dart', 'HTML', 'CSS'] },
+  { category: 'Mobile', items: ['Flutter', 'Android'] },
   { category: 'Frontend', items: ['React', 'Vite'] },
   { category: 'Backend', items: ['Node.js', 'Express'] },
+  { category: 'Testing', items: ['Automated testing', 'SDET'] },
   { category: 'Tools', items: ['Git', 'GitHub', 'VS Code'] },
 ]
 
@@ -33,37 +35,36 @@ const myProjects: Project[] = [
     id: 'portfolio-site',
     title: 'Personal Portfolio',
     description:
-      'This site — built from scratch with React 19, TypeScript, Vite, and an Express backend.',
+      'This site — built from scratch with React 19, TypeScript, Vite, and a serverless backend.',
     tech: ['React', 'TypeScript', 'Vite', 'Express', 'Node.js'],
-    repoUrl: 'https://github.com/Nick-Joseph',
+    repoUrl: 'https://github.com/Nick-Joseph/portfolio',
   },
 ]
 
 const myEntries: ResumeEntry[] = [
-  // One experience entry — repeat the object for each job:
   {
-    id: 'flutterdeveloper-role',        // any unique string, e.g. 'acme-2022'
+    id: 'logride-flutter',
     role: 'Flutter Developer',
-    organization: 'Logride',
+    organization: 'LogRide',
     period: '2025 – 2026',
-    description: 'Flutter developer for the android application in logride',
-
+    description:
+      'Developed and maintained the Android application using Flutter and Dart.',
   },
   {
-    id: 'savana-role',
+    id: 'savana-sdet',
     role: 'Flutter SDET',
     organization: 'Savana',
     period: '2024 – 2025',
     description:
-      'Creating automated testing suites for inner banking systems and processes',
+      'Built automated testing suites for internal banking systems and processes.',
   },
   {
-    id: 'consulting-role',
-    role: ' Software Developer',
+    id: 'lunadev-developer',
+    role: 'Software Developer',
     organization: 'LunaDev',
     period: '2020 – 2024',
     description:
-      'Full Stack mobile developer creating applications for Orlando based companies.',
+      'Full-stack mobile developer building applications for Orlando-based companies.',
   },
 ]
 
@@ -73,7 +74,7 @@ function App() {
       <Navbar />
       <Hero
         name="Nicholas Joseph"
-        tagline="Full-Stack Developer"
+        tagline="Full-Stack & Mobile Developer"
         available={true}
       />
       <About headline="About me" paragraphs={aboutParagraphs} />

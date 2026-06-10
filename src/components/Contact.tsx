@@ -45,6 +45,20 @@ function Contact() {
         <section id="contact">
             <h2>Contact</h2>
 
+            <p className="contact-intro">
+                Have a project or role in mind? Send a message below, or reach me directly:
+            </p>
+            <div className="contact-links">
+                <a href="mailto:njoseph321@gmail.com">njoseph321@gmail.com</a>
+                <a
+                    href="https://github.com/Nick-Joseph"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    GitHub
+                </a>
+            </div>
+
             {status === 'success' && (
                 <p className="form-success">Thanks — I’ll be in touch.</p>
             )}
