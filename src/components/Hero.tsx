@@ -4,9 +4,11 @@ type HeroProps = {
     name: string
     tagline: string
     available?: boolean
+    businessUrl?: string
+    businessLabel?: string
 }
 
-function Hero({ name, tagline, available = true }: HeroProps) {
+function Hero({ name, tagline, available = true, businessUrl, businessLabel }: HeroProps) {
     return (
         <section id="hero">
             <div className="hero">
@@ -32,6 +34,16 @@ function Hero({ name, tagline, available = true }: HeroProps) {
                 <a href="#contact" className="btn btn-secondary">
                     Get in touch
                 </a>
+                {businessUrl && businessLabel && (
+                    <a
+                        href={businessUrl}
+                        className="btn btn-secondary"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {businessLabel}
+                    </a>
+                )}
             </div>
         </section>
     )
